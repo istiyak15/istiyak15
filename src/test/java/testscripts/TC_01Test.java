@@ -27,7 +27,7 @@ public class TC_01Test extends BaseClass{
 	@Test
 	public void testCase01() throws EncryptedDocumentException, IOException, AWTException {
 		//navigate to create New Lead Account
-		TC_01Test.getcreateLeadaccount();
+		TC_01Test.getcreateLeadaccount1();
 		LeadsPage leadspage=new LeadsPage(driver);
 		JavascriptExecutor javaScript = (JavascriptExecutor) driver;
 		leadspage.getSalutationlistBox().click();
@@ -93,13 +93,23 @@ public class TC_01Test extends BaseClass{
 			Reporter.log("all the inputs are matched successfully",true);
 		} 
 	}
-	public void Scenario_02() {
-		TC_01Test.getcreateLeadaccount();
+	public static void getcreateLeadaccount1() {
+		HomePage homepage=new HomePage(driver);
+		JavascriptExecutor javaScript = (JavascriptExecutor) driver;
+		homepage.getDotIcon().click();
+		javaScript.executeScript("arguments[0].click();", homepage.getViewAllLink());
+		Assert.assertEquals(homepage.getAppLauncherpopupText().getText(), "App Launcher");
+		Reporter.log("App Launcher popup is displayed successfully",true);
+		homepage.getSearchAppTextField().sendKeys("LEADS");
+		homepage.getLeadsLink().click();
 		LeadsPage leadspage=new LeadsPage(driver);
-		leadspage.getSaveButton().click();
-		Assert.assertEquals(driver.getTitle(), "Recently Viewed | Leads | Salesforce");
+		Assert.assertEquals(leadspage.getRecentlyViewedText().getText(), "Recently Viewed");
+		Reporter.log("Leads page is displayed successfully",true);
+		leadspage.getCreateNewLink().click();
+		Assert.assertEquals(leadspage.getNewLeadtext().getText(), "New Lead");
+		Reporter.log("new Leads popup is displayed successfully",true);
 	}
-	static void getcreateLeadaccount() {
+	static void getcreateTrimbleaccount() {
 		// TODO Auto-generated method stub
 		
 	}
